@@ -15,12 +15,20 @@ Data is processed as a series of .png frames along with the original
 format that is honored by the Chromecast.
 
 ```sh
-fmpeg -r 25 -i tmpdir/frame_%05d.png -i input.mp3 -c:v libx264
--profile:v high -level 5 -crf 18 -maxrate 10M -bufsize 16M -pix_fmt
-yuv420p -vf "scale=iw*sar:ih,
-scale='if(gt(iw,ih),min(1920,iw),-1)':'if(gt(iw,ih),-1,min(1080,ih))'"
--x264opts
-bframes=3:cabac=1 -movflags faststart -c:a aac -b:a 320k -y output.mp4
+fmpeg -r 25 -i tmpdir/frame_%05d.png -i input.mp3 
+  -c:v libx264
+  -profile:v high
+  -level 5
+  -crf 18
+  -maxrate 10M
+  -bufsize 16M
+  -pix_fmt yuv420p
+  -vf "scale=iw*sar:ih,scale='if(gt(iw,ih),min(1920,iw),-1)':'if(gt(iw,ih),-1,min(1080,ih))'"
+  -x264opts bframes=3:cabac=1
+  -movflags faststart
+  -c:a aac
+  -b:a 320k
+  -y output.mp4
 ```
 
 Notice the input is a temp directory with all the .png frames along with
