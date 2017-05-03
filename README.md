@@ -12,9 +12,11 @@ supports movie playback.
 
 The pipeline is as follows:
 
+```sh
 From S3 -> .zip file fetch -> unzipped -> frame_dumper applied to .cdg
 -> ffmpeg applied to .png/.mp3 assets -> output.mp4 -> served via Go
 server.
+```
 
 ## CDG frame_dumper
 A rust application that concerns itself with taking a `.cdg` file
