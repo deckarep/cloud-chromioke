@@ -52,7 +52,12 @@ Google Home app in the Settings section.
 docker build -t cdg .
 ```
 
-## Running
+## Running the server
 ```sh
-docker run -it -v=`pwd`:/tmpdir cdg
+docker run -it -v=`pwd`:/tmpdir -p 0.0.0.0:8080:8080 cdg
+```
+
+## Processing a music file.
+```sh
+docker run -v=`pwd`:/tmpdir --entrypoint="./process.sh" cdg "{artist - song.zip}"
 ```

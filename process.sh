@@ -1,7 +1,14 @@
 #!/bin/bash
+original_zip=$1
+
+echo "Unzipping file: $original_zip..."
+unzip "$original_zip"
+
+echo "Renaming to input.*..."
+mv *.mp3 input.mp3
+mv *.cdg input.cdg
+
 echo "Cleaning up..."
-rm -f output.mp4
-rm -rf tmpdir
 mkdir -p tmpdir
 
 echo "Generating all frames..."
@@ -25,3 +32,8 @@ ffmpeg -r 25 \
   -strict -2 \
   -b:a 320k \
   -y output.mp4
+
+echo "Clean up files..."
+rm -f input.mp3
+rm -f input.cdg
+rm -rf tmpdir
