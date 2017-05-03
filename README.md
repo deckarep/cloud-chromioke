@@ -47,4 +47,12 @@ castnow --address 10.0.0.32 --type "video/mp4" output.mp4
 Where the address is that of your Chromecast which you can get from your
 Google Home app in the Settings section.
 
+## Building
+```sh
+docker build -t cdg .
+```
 
+## Running
+```sh
+docker run -it -v=`pwd`:/tmpdir cdg
+```
