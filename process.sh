@@ -1,12 +1,13 @@
 #!/bin/bash
-
-# Create the dir.
+echo "Cleaning up..."
 rm -f output.mp4
 rm -rf tmpdir
 mkdir -p tmpdir
-# Generate all the frames.
-./frame_dumper input.cdg tmpdir
-# Generate the final output.mp4 movie that is Chromecast compatible.
+
+echo "Generating all frames..."
+frame_dumper input.cdg tmpdir
+
+echo "Generating .mp4 file..."
 ffmpeg -r 25 \
   -i tmpdir/frame_%05d.png \
   -i input.mp3 \
@@ -21,5 +22,6 @@ ffmpeg -r 25 \
   -x264opts bframes=3:cabac=1 \
   -movflags faststart \
   -c:a aac \
+  -strict -2 \
   -b:a 320k \
   -y output.mp4
